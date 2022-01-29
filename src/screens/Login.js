@@ -1,9 +1,23 @@
-import React from 'react';
+import { Button } from "@mui/material";
+import React from "react";
+import { useNavigate } from "react-router";
 
 const Login = () => {
-  return(
-      <div></div>
-  )
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate("/home");
+  };
+  return (
+    <div>
+      <div>LOGIN</div>
+      <div>LOGIN</div>
+      <div>LOGIN</div>
+      <div>LOGIN</div>
+      <div>LOGIN</div>
+      <div>LOGIN</div>
+      <Button variant="contained" title="Login" onClick={handleLogin} />
+    </div>
+  );
 };
 
 export default Login;
