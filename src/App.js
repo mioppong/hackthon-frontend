@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import StickyBox from "react-sticky-box/dist/esnext";
 
