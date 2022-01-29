@@ -1,22 +1,74 @@
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import StickyBox from "react-sticky-box/dist/esnext";
+import Logo from "../components/Logo";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const leftSide = {
+    width: "12vw",
+    height: "98vh",
+    borderRadius: 20,
+    borderWidth: 1,
+    backgroundColor: "#f2f2f2",
+  };
+
+  const container = {
+    height: "100vh",
+    overflow: "auto",
+  };
+
+  const insideMainContainer = {
+    display: "flex",
+    flex: 1,
+    alignItems: "flex-start",
+    justifyContent: "center",
+  };
+
+  const rightSide = { width: "85vw", padding: "1%", backgroundColor: "red" };
+  const logo = {
+    height: 120,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+  const buttonsContainer = {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    // backgroundColor: "blue",
+  };
   return (
-    <div style={{ height: "100vh", width: "100vw", overflow: "auto" }}>
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          alignItems: "flex-start",
-          justifyContent: "center",
-        }}
-      >
+    <div style={container}>
+      <div style={insideMainContainer}>
         {/* LEFT SIDE */}
-        <StickyBox style={{ border: "3px solid green", with: "15vw" }}>
-          Sidebar
+        <StickyBox style={leftSide}>
+          <div style={logo}>
+            <Logo />
+          </div>
+
+          <div style={buttonsContainer}>
+            <Button
+              variant="contained"
+              style={{ marginTop: 20 }}
+              size="large"
+              onClick={() => navigate("/home")}
+            >
+              HOME
+            </Button>
+            <Button
+              variant="contained"
+              style={{ marginTop: 20 }}
+              size="large"
+              onClick={() => navigate("/inventory")}
+            >
+              INVENTORY
+            </Button>
+          </div>
         </StickyBox>
 
-        <div style={{ width: "85vw", border: "3px solid blue" }}>
+        {/* RIGHT SIDE */}
+        <div style={rightSide}>
           <h1>Main Content</h1>
           <h1>Main Content</h1>
           <h1>Main Content</h1>
@@ -58,8 +110,6 @@ const HomePage = () => {
           <h1>Main Content</h1>
           <h1>Main Content</h1>
         </div>
-
-       
       </div>
     </div>
   );
