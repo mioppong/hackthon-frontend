@@ -16,7 +16,7 @@ const HomePage = () => {
           Sidebar
         </StickyBox>
 
-        <div style={{ width: "70vw", border: "3px solid blue" }}>
+        <div style={{ width: "85vw", border: "3px solid blue" }}>
           <h1>Main Content</h1>
           <h1>Main Content</h1>
           <h1>Main Content</h1>
@@ -59,10 +59,7 @@ const HomePage = () => {
           <h1>Main Content</h1>
         </div>
 
-        {/* RIGHT SIDE */}
-        <StickyBox style={{ border: "3px solid green", with: "15vw" }}>
-          Sidebar
-        </StickyBox>
+       
       </div>
     </div>
   );
