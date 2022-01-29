@@ -1,23 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import StickyBox from "react-sticky-box/dist/esnext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ height: "100vh", width: "100vw", overflow: "auto" }}>
+      <div style={{ display: "flex", flex: 1, alignItems: "flex-start", justifyContent: "center" }}>
+       
+        {/* LEFT SIDE */}
+        <StickyBox style={{ border: "3px solid green", with: "15vw" }}>
+          Sidebar
+        </StickyBox>
+
+        <div style={{ width: '70vw', border: "3px solid blue" }}>
+
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+         <h1>Main Content</h1>
+
+        </div>
+        
+        {/* RIGHT SIDE */}
+        <StickyBox style={{ border: "3px solid green", with: "15vw" }}>
+          Sidebar
+        </StickyBox>
+      </div>
     </div>
   );
 }
