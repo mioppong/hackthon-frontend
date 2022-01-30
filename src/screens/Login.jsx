@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, {useRef} from "react";
 import { useNavigate } from "react-router";
 import './Login.css';
 
@@ -15,11 +15,30 @@ const Login = () => {
     height: "100vh",
     width: "100vw",
   };
+
+  const emailInputref = useRef();
+  const passwordInputref = useRef();
+
+  const submitHandler = (e) =>{
+    e.preventDefault();
+
+    const enteredEmail = emailInputref.current.value;
+    const enteredPassword = passwordInputref.current.value; 
+
+    const data = {
+      email: enteredEmail,
+      password: enteredPassword,
+    }
+    console.log(data);
+    navigate("/home");
+  }
+
+
   return (
     <div style={container}>
       {/* left side */}
       <div style={{ height: "100vh", width: "50vw" }}>
-        <img src="https://images.unsplash.com/photo-1587370560942-ad2a04eabb6d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8bWVkaWNpbmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" className="left_img" alt="login_image"/>
+        <img src="https://images.unsplash.com/photo-1628771065518-0d82f1938462?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fG1lZGljaW5lfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" className="left_img" alt="login_image"/>
         <Button
           variant="contained"
           title="Login"
@@ -39,9 +58,9 @@ const Login = () => {
           <h1 className="heading_h1">HopNet - The place to know everything that's happening</h1>
         <div className="login_body"> 
         <div className="register-form">
-          <form className="form-container">
-            <input name="email" className="form-field" type="text" placeholder="Please Enter your email" required/>
-            <input name="password" className="form-field" type="password" placeholder="Please Enter your password" required/>
+          <form className="form-container" onSubmit={submitHandler}>
+            <input name="email" className="form-field" type="text" placeholder="Please Enter your email" required ref={emailInputref} />
+            <input name="password" className="form-field" type="password" placeholder="Please Enter your password" required ref={passwordInputref} />
             <button type="submit" className="form-field button">Register</button>
           </form>
         </div>

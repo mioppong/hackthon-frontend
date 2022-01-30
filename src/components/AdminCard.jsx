@@ -8,7 +8,7 @@ const AdminCard = ({ data }) => {
     <Paper
       style={{
         width: "90%",
-        height: 200,
+        height: 240,
         marginTop: 20,
         padding: "1%",
         display: "flex",
