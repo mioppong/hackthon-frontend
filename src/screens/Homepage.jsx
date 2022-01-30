@@ -1,42 +1,73 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  Card,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import StickyBox from "react-sticky-box/dist/esnext";
-import Logo from "../components/Logo";
+import DoctorIcon from "../components/DoctorIcon";
+import PatientIcon from "../components/PatientIcon";
+import ReactLoading from "react-loading";
+
+const container = {
+  height: "100vh",
+  overflow: "auto",
+};
+const insideMainContainer = {
+  display: "flex",
+  flex: 1,
+  alignItems: "flex-start",
+  justifyContent: "center",
+};
+
+const rightSide = {
+  width: "85vw",
+  padding: "1%",
+  // backgroundColor: "red",
+};
+const leftSide = {
+  width: "12vw",
+  height: "98vh",
+  borderRadius: 20,
+  borderWidth: 1,
+  backgroundColor: "#f2f2f2",
+};
+
+const logo = {
+  height: 120,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
+const buttonsContainer = {
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
+};
+
+const createButton = {
+  position: "absolute",
+  top: "80%",
+  left: "90%",
+  width: 100,
+  height: 100,
+};
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const leftSide = {
-    width: "12vw",
-    height: "98vh",
-    borderRadius: 20,
-    borderWidth: 1,
-    backgroundColor: "#f2f2f2",
-  };
+  const [loading, setLoading] = useState(true);
 
-  const container = {
-    height: "100vh",
-    overflow: "auto",
-  };
+  useEffect(() => {}, []);
 
-  const insideMainContainer = {
-    display: "flex",
-    flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
-  };
-
-  const rightSide = { width: "85vw", padding: "1%", backgroundColor: "red" };
-  const logo = {
-    height: 120,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-  const buttonsContainer = {
-    display: "flex",
-    flexDirection: "column",
-    flex: 1,
-    // backgroundColor: "blue",
+  const getData = async () => {
+    const response = await axios.get();
   };
   return (
     <div style={container}>
@@ -44,7 +75,8 @@ const HomePage = () => {
         {/* LEFT SIDE */}
         <StickyBox style={leftSide}>
           <div style={logo}>
-            <Logo />
+            {/* <DoctorIcon /> */}
+            <PatientIcon />
           </div>
 
           <div style={buttonsContainer}>
@@ -68,48 +100,59 @@ const HomePage = () => {
         </StickyBox>
 
         {/* RIGHT SIDE */}
-        <div style={rightSide}>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-          <h1>Main Content</h1>
-        </div>
+        {!loading && (
+          <div style={rightSide}>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+            <h1>Main Content</h1>
+
+            <Button
+              variant="contained"
+              style={createButton}
+              size="large"
+              onClick={() => navigate("/home")}
+              children="Create"
+            />
+          </div>
+        )}
+        {loading && (
+          <div
+            style={{
+              ...rightSide,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "10%",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <ReactLoading
+              type={"cylon"}
+              color={"dodgerblue"}
+              height={"20%"}
+              width={"20%"}
+            />
+            <Typography variant="h5" children="Loading :)" />
+          </div>
+        )}
       </div>
     </div>
   );

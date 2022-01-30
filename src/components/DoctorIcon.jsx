@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function LogoIcon({ size = 100 }) {
+function DoctorIcon({ size = 100 }) {
   return (
     <svg
       width={size}
@@ -215,4 +215,4 @@ function LogoIcon({ size = 100 }) {
   );
 }
 
-export default LogoIcon;
+export default DoctorIcon;
