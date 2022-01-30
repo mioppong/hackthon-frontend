@@ -7,7 +7,11 @@ const PatientCard = ({ data }) => {
   const newDateFormat = new Date(data.expiryDate).toDateString();
   return (
     <Paper style={{ width: "90%", height: 250, marginTop: 20, padding: "1%" }}>
-      <Typography variant="h4">{data.title}</Typography>
+      <Typography variant="body1">{`ID: ${data.key}`}</Typography>
+
+      <Typography style={{ marginTop: 20 }} variant="h4">
+        {data.title}
+      </Typography>
       <div style={{ marginTop: 15 }}>
         <Typography variant="h6">{data.description}</Typography>
       </div>
