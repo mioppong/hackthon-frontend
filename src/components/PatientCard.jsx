@@ -9,12 +9,7 @@ const PatientCard = ({ data }) => {
       <div style={{ marginTop: 15 }}>
         <Typography variant="h6">{data.description}</Typography>
       </div>
-      <div style={{ marginTop: 15, display: "flex", alignItems: "center" }}>
-        <Typography variant="h6" fontWeight={"bold"}>
-          {"Location "}
-        </Typography>
-        <Typography variant="body1">{`:: ${data.location}`}</Typography>
-      </div>
+
       <Typography
         style={{ marginTop: 20 }}
         variant="body2"

@@ -1,15 +1,4 @@
-import {
-  Button,
-  Card,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Typography, TextField, Modal, Paper } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import StickyBox from "react-sticky-box/dist/esnext";
@@ -65,33 +54,11 @@ const createButton = {
   height: 100,
 };
 
-const CreateModal = ({ visible }) => (
-  <Dialog open={visible} keepMounted>
-    <DialogTitle>{"Delete this user"}</DialogTitle>
-
-    <DialogContent>
-      <TextField />
-    </DialogContent>
-
-    <DialogActions>
-      <Button
-        size="large"
-        variant="contained"
-        children="No"
-        style={{ margin: "10px" }}
-      />
-      <Button
-        children="Delete"
-        variant="contained"
-        size="small"
-        style={{
-          margin: "10px",
-          backgroundColor: "red",
-        }}
-      />
-    </DialogActions>
-  </Dialog>
-);
+const modalContainerStyle = {
+  justifyContent: "center",
+  display: "flex",
+  alignItems: "center",
+};
 const HomePage = (props) => {
   const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
@@ -144,6 +111,8 @@ const HomePage = (props) => {
         {/* RIGHT SIDE */}
         {!loading && (
           <div style={rightSide}>
+            <Typography variant="h3">Home</Typography>
+
             {/* if patient */}
             {isAdmin &&
               homeStore.posts.map((item, index) => {
@@ -179,16 +148,59 @@ const HomePage = (props) => {
           </div>
         )}
       </div>
-      <CreateModal visible={modalVisible} />
+
       {isAdmin && (
         <Button
           variant="contained"
           style={createButton}
           size="large"
-          onClick={handleCreate}
+          onClick={() => setModalVisible(true)}
           children="Create"
         />
       )}
+      <Modal open={modalVisible}>
+        <div style={modalContainerStyle}>
+          <Paper
+            style={{
+              height: "300px",
+              width: "500px",
+              marginTop: "15vh",
+              display: "flex",
+              flexDirection: "column",
+              padding: "10px",
+              overflow: "auto",
+            }}
+          >
+            <Typography variant="h6">Create post</Typography>
+
+            <TextField label="Title" type="ID" style={{ margin: "10px" }} />
+            <TextField
+              label="Description"
+              type="ID"
+              style={{ margin: "10px" }}
+            />
+
+            <div style={{ marginTop: "auto", alignSelf: "center" }}>
+              <Button
+                size="large"
+                variant="contained"
+                children="Update"
+                style={{ margin: "10px" }}
+                onClick={() => setModalVisible(false)}
+              />
+              <Button
+                children="cancel"
+                variant="contained"
+                style={{
+                  margin: "10px",
+                  backgroundColor: "red",
+                }}
+                onClick={() => setModalVisible(false)}
+              />
+            </div>
+          </Paper>
+        </div>
+      </Modal>
     </div>
   );
 };
