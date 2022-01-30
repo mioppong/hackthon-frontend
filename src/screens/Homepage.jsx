@@ -6,15 +6,20 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Paper,
+  TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import StickyBox from "react-sticky-box/dist/esnext";
 import DoctorIcon from "../components/DoctorIcon";
 import PatientIcon from "../components/PatientIcon";
 import ReactLoading from "react-loading";
+import { login } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import PatientCard from "../components/PatientCard";
+import AdminCard from "../components/AdminCard";
 
 const container = {
   height: "100vh",
@@ -60,33 +65,56 @@ const createButton = {
   height: 100,
 };
 
+const CreateModal = ({ visible }) => (
+  <Dialog open={visible} keepMounted>
+    <DialogTitle>{"Delete this user"}</DialogTitle>
+
+    <DialogContent>
+      <TextField />
+    </DialogContent>
+
+    <DialogActions>
+      <Button
+        size="large"
+        variant="contained"
+        children="No"
+        style={{ margin: "10px" }}
+      />
+      <Button
+        children="Delete"
+        variant="contained"
+        size="small"
+        style={{
+          margin: "10px",
+          backgroundColor: "red",
+        }}
+      />
+    </DialogActions>
+  </Dialog>
+);
 const HomePage = (props) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  const homeStore = useSelector((state) => state.homeStore);
+  const { loading, isAdmin } = homeStore;
 
-  const getData = async () => {
-    const response = await axios.get(
-      "https://61aecea833653500172f9fbf.mockapi.io/login/1"
-    );
-
-    setData(response.data);
-    console.log("data we got is", response.data);
-    setLoading(false);
-  };
   useEffect(() => {
-    console.log("YERRRR", props);
-    getData();
-  }, [getData]);
+    console.log("OUR DAASFSDF", homeStore.posts);
+    dispatch(login());
+  }, [isAdmin]);
 
+  const handleCreate = () => {
+    setModalVisible(true);
+  };
   return (
     <div style={container}>
       <div style={insideMainContainer}>
         {/* LEFT SIDE */}
         <StickyBox style={leftSide}>
           <div style={logo}>
-            {/* <DoctorIcon /> */}
-            <PatientIcon />
+            {isAdmin && <DoctorIcon />}
+            {!isAdmin && <PatientIcon />}
           </div>
 
           <div style={buttonsContainer}>
@@ -98,51 +126,38 @@ const HomePage = (props) => {
             >
               HOME
             </Button>
-            <Button
-              variant="contained"
-              style={{ marginTop: 20 }}
-              size="large"
-              onClick={() => navigate("/inventory")}
-            >
-              INVENTORY
-            </Button>
+
+            {/* only show this button to admins */}
+            {homeStore.isAdmin && (
+              <Button
+                variant="contained"
+                style={{ marginTop: 20 }}
+                size="large"
+                onClick={() => navigate("/inventory")}
+              >
+                INVENTORY
+              </Button>
+            )}
           </div>
         </StickyBox>
 
         {/* RIGHT SIDE */}
         {!loading && (
           <div style={rightSide}>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
-            <h1>Main Content</h1>
+            {/* if patient */}
+            {isAdmin &&
+              homeStore.posts.map((item, index) => {
+                return <AdminCard data={item} />;
+              })}
 
-            <Button
-              variant="contained"
-              style={createButton}
-              size="large"
-              onClick={() => navigate("/home")}
-              children="Create"
-            />
+            {/* if ADMIN */}
+            {!isAdmin &&
+              homeStore.inventory.map((item, index) => {
+                return <PatientCard data={item} />;
+              })}
           </div>
         )}
+
         {loading && (
           <div
             style={{
@@ -164,6 +179,16 @@ const HomePage = (props) => {
           </div>
         )}
       </div>
+      <CreateModal visible={modalVisible} />
+      {isAdmin && (
+        <Button
+          variant="contained"
+          style={createButton}
+          size="large"
+          onClick={handleCreate}
+          children="Create"
+        />
+      )}
     </div>
   );
 };
