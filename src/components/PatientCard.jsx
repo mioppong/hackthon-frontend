@@ -1,8 +1,10 @@
-import { Paper, Typography } from "@mui/material";
+import { Alert, Paper, Typography } from "@mui/material";
 import React from "react";
 
 const PatientCard = ({ data }) => {
-  console.log("each item", data);
+  const currentDate = Date.now();
+
+  const newDateFormat = new Date(data.expiryDate).toDateString();
   return (
     <Paper style={{ width: "90%", height: 250, marginTop: 20, padding: "1%" }}>
       <Typography variant="h4">{data.title}</Typography>
@@ -10,12 +12,16 @@ const PatientCard = ({ data }) => {
         <Typography variant="h6">{data.description}</Typography>
       </div>
 
+      {currentDate > data.expiryDate
+        ? alert(`${data.title} has EXPIRED`)
+        : console.log("NOT EXPIRED")}
+
       <Typography
         style={{ marginTop: 20 }}
         variant="body2"
         fontWeight={"bold"}
         color={"red"}
-      >{`Expiry Date: ${data.expiryDate}`}</Typography>
+      >{`Expiry Date: ${newDateFormat}`}</Typography>
     </Paper>
   );
 };
