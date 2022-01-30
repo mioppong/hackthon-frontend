@@ -60,15 +60,25 @@ const createButton = {
   height: 100,
 };
 
-const HomePage = () => {
+const HomePage = (props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {}, []);
+  const [data, setData] = useState({});
 
   const getData = async () => {
-    const response = await axios.get();
+    const response = await axios.get(
+      "https://61aecea833653500172f9fbf.mockapi.io/login/1"
+    );
+
+    setData(response.data);
+    console.log("data we got is", response.data);
+    setLoading(false);
   };
+  useEffect(() => {
+    console.log("YERRRR", props);
+    getData();
+  }, [getData]);
+
   return (
     <div style={container}>
       <div style={insideMainContainer}>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 const Login = () => {
   const navigate = useNavigate();
   const handleLogin = () => {
-    navigate("/home");
+    navigate("/home", { isAdmin: true, data: "mydsfsdfsd" });
   };
 
   const container = {
@@ -25,7 +25,7 @@ const Login = () => {
           onClick={handleLogin}
         />
       </div>
-      
+
       {/*RIGHT SIDE  */}
       <div style={{ height: "100vh", backgroundColor: "green", width: "50vw" }}>
         <Button
